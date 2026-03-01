@@ -1,19 +1,49 @@
 import { Title } from "@solidjs/meta";
-import Counter from "~/components/Counter";
+import { createSupabaseServerClient } from "~/lib/supabase/server";
+import { useNavigate } from "@solidjs/router";
+import { createResource, createEffect } from "solid-js";
+import LoggedOutDotGridBackground from "~/components/special/logged-out-dot-grid-background";
+// import Counter from "~/components/Counter";
+import { Button } from "~/components/ui/button";
+import LineDrawThenFillText from "~/components/special/line-draw-text";
 
 export default function Home() {
-  return (
-    <main>
-      <Title>Hello World</Title>
-      <h1>Hello world!</h1>
-      <Counter />
-      <p>
-        Visit{" "}
-        <a href="https://start.solidjs.com" target="_blank">
-          start.solidjs.com
-        </a>{" "}
-        to learn how to build SolidStart apps.
-      </p>
-    </main>
-  );
+    const navigate = useNavigate();
+
+    const [user] = createResource(async () => {
+        const supabase = await createSupabaseServerClient();
+        const {
+            data: { user },
+        } = await supabase.auth.getUser();
+        return user;
+    });
+
+    createEffect(() => {
+        if (user()) {
+            navigate("/protected", { replace: true });
+        }
+    });
+
+    return (
+        <main class="flex justify-center items-center h-screen w-screen">
+            <Title>Hello World</Title>
+            <LoggedOutDotGridBackground />
+
+            <div class="flex flex-col justify-center items-center gap-4 h-fit backdrop-blur-lg p-8 rounded-lg">
+                <div>
+                    <LineDrawThenFillText text="kortal²" duration={2} />
+                </div>
+                <div class="flex flex-row gap-2">
+                    <a href="/sign-in">
+                        <Button variant="ghost">Sign In</Button>
+                    </a>
+                    <span class="cursor-not-allowed">
+                        <Button variant="ghost" disabled>
+                            Sign Up
+                        </Button>
+                    </span>
+                </div>
+            </div>
+        </main>
+    );
 }

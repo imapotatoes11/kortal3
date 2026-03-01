@@ -16,10 +16,13 @@
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.98.0",
     "@tailwindcss/vite": "^4.2.1",
+    "class-variance-authority": "^0.7.1",
     "nitro": "3.0.1-alpha.2",
     "openai": "^6.25.0",
     "rss-parser": "^3.13.0",
     "solid-js": "^1.9.5",
+    "solid-motionone": "^1.0.4",
+    "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.1",
     "vite": "^7.0.0"
   },
