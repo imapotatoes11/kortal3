@@ -6,6 +6,7 @@ import LoggedOutDotGridBackground from "~/components/special/logged-out-dot-grid
 // import Counter from "~/components/Counter";
 import { Button } from "~/components/ui/button";
 import LineDrawThenFillText from "~/components/special/line-draw-text";
+import MinimalThemeSwitcher from "~/components/ui/minimal-theme-switcher";
 
 export default function Home() {
     const navigate = useNavigate();
@@ -28,6 +29,7 @@ export default function Home() {
         <main class="flex justify-center items-center h-screen w-screen">
             <Title>Hello World</Title>
             <LoggedOutDotGridBackground />
+            <MinimalThemeSwitcher />
 
             <div class="flex flex-col justify-center items-center gap-4 h-fit backdrop-blur-lg p-8 rounded-lg">
                 <div>
